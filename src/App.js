@@ -1,7 +1,8 @@
 import "./global/globalStyles.scss";
+import { Login } from "./pages/Login";
 
 function App() {
-  return <div>Hellow !!</div>;
+  return <Login />;
 }
 
 export default App;

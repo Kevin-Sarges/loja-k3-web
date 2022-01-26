@@ -1,21 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap");
 
 :root {
   //Fonts
-  --Roboto: 'Roboto', sans-serif;
+  --Roboto: "Roboto", sans-serif;
 
   // Colors
-  --Secondary01: #BC93FF,
-  --Secondary02: #9F64FF,
-  --Secondary03: #672ACA,
-  --Secondary04: #6024C2,
-  --Secondary05: #390096,
-
-  --LigthGray: #E5E5E5,
-  --Gray: #C4C4C4,
-  --White: #FFFFFF,
-  --Black: #000000,
-  --Green: #039D00,
+  --Secondary01: #bc93ff;
+  --Secondary02: #9f64ff;
+  --Secondary03: #672aca;
+  --Secondary04: #6024c2;
+  --Secondary05: #390096;
+  --LigthGray: #e5e5e5;
+  --Gray: #c4c4c4;
+  --White: #ffffff;
+  --Black: #000000;
+  --Green: #039d00;
 }
 
 * {
@@ -30,11 +29,12 @@ html {
 
   body {
     width: 80%;
-    height: 100%;
+    height: 100vh;
     margin: 0 auto;
     font-size: 16px;
     font-family: var(--Roboto);
     font-weight: 400;
+    background-color: var(--LigthGray);
     color: var(--Black);
     position: relative;
 
