@@ -1,13 +1,13 @@
 import React from "react";
 
-import { Button } from "../../components/Button";
+import { ButtonContainer } from "../../components/Button";
 
 import styles from "./styles.module.scss";
 
 export function Login() {
   return (
     <div className={styles.mainContainer}>
-      <form>
+      <form method="post">
         <h1>Login</h1>
 
         <div className={styles.inputs}>
@@ -20,7 +20,7 @@ export function Login() {
           <input type="password" />
         </div>
 
-        <Button text="Entrar" />
+        <ButtonContainer />
       </form>
     </div>
   );
