@@ -11,7 +11,7 @@ export function Header() {
 
       <ul className={styles.list}>
         <Link to="/home">Home</Link>
-        <Link to="/#">Posta produto</Link>
+        <Link to="/posta-produto">Posta produto</Link>
       </ul>
     </header>
   );
