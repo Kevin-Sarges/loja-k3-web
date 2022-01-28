@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ButtonContainer } from "../../components/Button";
+import { Button } from "../../components/Button";
 
 import styles from "./styles.module.scss";
 
@@ -20,7 +20,7 @@ export function Login() {
           <input type="password" />
         </div>
 
-        <ButtonContainer />
+        <Button text="Entrar" />
       </form>
     </div>
   );

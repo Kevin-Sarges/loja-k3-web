@@ -1,11 +1,10 @@
+import "./styles.module.scss";
 import React from "react";
 
-import styles from "./styles.module.scss";
-
-export function ButtonContainer(props) {
+export function Button(props) {
   return (
-    <div style={styles.button}>
-      <p>dajfbaskjf</p>
-    </div>
+    <button type="submit" {...props}>
+      <p>{props.text}</p>
+    </button>
   );
 }

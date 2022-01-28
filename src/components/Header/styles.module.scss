@@ -1,0 +1,27 @@
+header {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--Gradient);
+  border-radius: 0 0 10px 10px;
+  border: 1px solid var(--Secondary04);
+
+  img {
+    width: 58px;
+    height: 58px;
+  }
+
+  .list {
+    a {
+      margin-right: 15px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--White);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

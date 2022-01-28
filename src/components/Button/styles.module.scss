@@ -1,11 +1,13 @@
-.button {
-  width: 100%;
-  padding: 18px 70px;
+button {
+  padding: 12px 70px;
   background-color: var(--Secondary05);
-  border: 1px solid var(--Secondary04);
+  border: 1px solid var(--Secondary03);
+  border-radius: 8px;
   color: var(--White);
+  font-family: 700;
+  cursor: pointer;
 
-  p {
-    font-family: 700;
+  &:hover {
+    background-color: var(--Secondary03);
   }
 }

@@ -1,9 +1,14 @@
 import "./global/globalStyles.scss";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import { Login } from "./pages/Login";
+import { Pages } from "./routes/auth.routes";
 
 function App() {
-  return <Login />;
+  return (
+    <Router>
+      <Pages />
+    </Router>
+  );
 }
 
 export default App;
