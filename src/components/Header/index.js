@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 
 export function Header() {
   return (
-    <header>
+    <header className={styles.headerComponent}>
       <img src={Logo} alt="Logo" />
 
       <ul className={styles.list}>
