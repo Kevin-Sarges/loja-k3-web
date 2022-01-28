@@ -1,5 +1,5 @@
 .mainContainer {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 
   .headerContainer {
@@ -23,6 +23,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 38px 8px;
+    justify-items: center;
 
     .componentProducts {
       width: 290px;
