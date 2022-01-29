@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 import { Header } from "../../components/Header";
 
+import { MyContext } from "../../context/MyContext";
 import { categories, productsFake } from "../../services/fakeData";
+
 import styles from "./styles.module.scss";
 
 export function Home() {
-  const [category, setCategory] = useState("");
+  const { category, setCategory } = useContext(MyContext);
 
   return (
     <>

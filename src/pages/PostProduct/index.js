@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { DropZone } from "../../components/DropZone";
 
+import { MyContext } from "../../context/MyContext";
 import { categories } from "../../services/fakeData";
+
 import styles from "./styles.module.scss";
 
 export function PostProduct() {
-  const [category, setCategory] = useState("");
+  const { category, setCategory } = useContext(MyContext);
 
   return (
     <>
@@ -34,7 +36,7 @@ export function PostProduct() {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option>Filtro</option>
+              <option>---</option>
               {categories.map((item) => (
                 <option value={item.category}>{item.category}</option>
               ))}
