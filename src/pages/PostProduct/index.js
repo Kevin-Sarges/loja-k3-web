@@ -10,7 +10,7 @@ import { categories } from "../../services/fakeData";
 import styles from "./styles.module.scss";
 
 export function PostProduct() {
-  const { category, setCategory } = useContext(MyContext);
+  const { category, handleCategory } = useContext(MyContext);
 
   return (
     <>
@@ -34,11 +34,13 @@ export function PostProduct() {
             <select
               className={styles.category}
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={handleCategory}
             >
               <option>---</option>
               {categories.map((item) => (
-                <option value={item.category}>{item.category}</option>
+                <option key={item.id} value={item.id}>
+                  {item.category}
+                </option>
               ))}
             </select>
           </div>
