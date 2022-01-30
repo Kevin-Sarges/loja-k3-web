@@ -5,7 +5,7 @@ import { Login } from "../pages/Login";
 import { Home } from "../pages/Home";
 import { PostProduct } from "../pages/PostProduct";
 
-export function Pages() {
+export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />

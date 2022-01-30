@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import { Header } from "../../components/Header";
 
@@ -8,19 +8,8 @@ import { categories, productsFake } from "../../services/fakeData";
 import styles from "./styles.module.scss";
 
 export function Home() {
-  const { category } = useContext(MyContext);
-  let [categorySelected, setCategorySelected] = useState([]);
-
-  function filterCategory(e) {
-    const value = e.target.value;
-    categorySelected = productsFake.filter((item) => item.category === value);
-
-    if (categorySelected.length <= 0) {
-      return alert("Não a produtos dessa categoria !!");
-    } else {
-      setCategorySelected(categorySelected);
-    }
-  }
+  const { category, categorySelected, filterCategory, handleCategory } =
+    useContext(MyContext);
 
   return (
     <>
@@ -33,6 +22,7 @@ export function Home() {
           <select
             className={styles.filter}
             value={category}
+            onChange={handleCategory}
             onClick={filterCategory}
           >
             <option>Filtro</option>
