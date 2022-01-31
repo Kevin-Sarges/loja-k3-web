@@ -15,12 +15,17 @@ export function Login() {
 
         <div className={styles.inputs}>
           <label>Email:</label>
-          <input type="text" name="email" onChange={handleChange} />
+          <input type="text" name="email" onChange={handleChange} required />
         </div>
 
         <div className={styles.inputs}>
           <label>Senha:</label>
-          <input type="password" name="password" onChange={handleChange} />
+          <input
+            type="password"
+            name="password"
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <Button text="Entrar" onClick={handleLogin} />

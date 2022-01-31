@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   let [categorySelected, setCategorySelected] = useState([]);
-  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
   const [category, setCategory] = useState("");
   const [inputs, setInputs] = useState({
     email: "",
@@ -51,32 +51,34 @@ export function AuthProvider({ children }) {
       password,
     });
 
-    console.log("login", response.data);
-
     const tokenUser = response.data.token;
 
-    localStorage.setItem("user", tokenUser);
+    if (tokenUser) {
+      localStorage.setItem("token", tokenUser);
+      api.defaults.headers.Authorization = `Bearer ${tokenUser}`;
 
-    api.defaults.headers.Authorization = `Bearer ${tokenUser}`;
-
-    setUser({ email });
-    navigate("/home");
+      setToken({ email });
+      navigate("/home");
+    } else {
+      alert("Email ou Senha incorretas !!");
+      navigate("/");
+    }
   }
 
   function logout() {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     api.defaults.headers.Authorization = null;
 
-    setUser(null);
+    setToken(null);
     navigate("/");
   }
 
   useEffect(() => {
-    const recovereTokenUser = localStorage.getItem("user");
+    const tokenUser = localStorage.getItem("token");
 
-    if (recovereTokenUser) {
-      setUser(recovereTokenUser);
-      api.defaults.headers.Authorization = `Bearer ${recovereTokenUser}`;
+    if (tokenUser) {
+      setToken(tokenUser);
+      api.defaults.headers.Authorization = `Bearer ${tokenUser}`;
     }
 
     setLoading(false);
@@ -92,8 +94,8 @@ export function AuthProvider({ children }) {
         handleChange,
         handleLogin,
 
-        authentificated: !!user,
-        user,
+        authentificated: !!token,
+        token,
 
         logout,
         loading,
