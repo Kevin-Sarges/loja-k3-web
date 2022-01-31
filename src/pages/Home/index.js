@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 
 import { Header } from "../../components/Header";
 
-import { MyContext } from "../../context/MyContext";
+import { AuthContext } from "../../context/auth";
 import { categories, productsFake } from "../../services/fakeData";
 
 import styles from "./styles.module.scss";
 
 export function Home() {
   const { category, categorySelected, filterCategory, handleCategory } =
-    useContext(MyContext);
+    useContext(AuthContext);
 
   return (
     <>

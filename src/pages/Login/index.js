@@ -1,48 +1,16 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import React, { useContext } from "react";
 
 import { Button } from "../../components/Button";
+import { AuthContext } from "../../context/auth";
 
-import api from "../../services/api";
 import styles from "./styles.module.scss";
 
 export function Login() {
-  const navigete = useNavigate();
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setFormData({ ...formData, [name]: value });
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    const { email, password } = formData;
-
-    await api
-      .post("/login", {
-        email,
-        password,
-      })
-      .then((response) => {
-        if (!response.data.message) {
-          navigete("/home");
-        } else {
-          alert("Email ou Senha incorretas !!");
-          navigete("/");
-        }
-      });
-  }
+  const { handleChange, handleLogin } = useContext(AuthContext);
 
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.form} method="post">
+      <form className={styles.form} method="post">
         <h1>Login</h1>
 
         <div className={styles.inputs}>
@@ -55,8 +23,8 @@ export function Login() {
           <input type="password" name="password" onChange={handleChange} />
         </div>
 
-        <Button text="Entrar" onClick={handleSubmit} />
-      </div>
+        <Button text="Entrar" onClick={handleLogin} />
+      </form>
     </div>
   );
 }

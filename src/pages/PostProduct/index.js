@@ -5,15 +5,15 @@ import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { DropZone } from "../../components/DropZone";
 
-import { MyContext } from "../../context/MyContext";
+import { AuthContext } from "../../context/auth";
 import { categories } from "../../services/fakeData";
 
-import api from "../../services/api";
+import { api } from "../../services/api";
 import styles from "./styles.module.scss";
 
 export function PostProduct() {
   const navigete = useNavigate();
-  const { category } = useContext(MyContext);
+  const { category } = useContext(AuthContext);
 
   const [selectImage, setSelectImage] = useState();
   const [formData, setFormData] = useState({
