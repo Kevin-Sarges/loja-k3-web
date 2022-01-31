@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
 import { Button } from "../../components/Button";
@@ -9,7 +9,6 @@ import styles from "./styles.module.scss";
 export function Login() {
   const navigete = useNavigate();
 
-  const [auth, setAuth] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -26,24 +25,24 @@ export function Login() {
 
     const { email, password } = formData;
 
-    const data = new FormData();
-
-    data.append("email", email);
-    data.append("password", password);
-
-    const {
-      data: { token },
-    } = await api.post("/login", data);
-
-    localStorage.setItem("token", JSON.stringify(token));
-    api.defaults.headers.Authorizatetion = `Bearer ${token}`;
-    navigete("/home");
-    setAuth(true);
+    await api
+      .post("/login", {
+        email,
+        password,
+      })
+      .then((response) => {
+        if (!response.data.message) {
+          navigete("/home");
+        } else {
+          alert("Email ou Senha incorretas !!");
+          navigete("/");
+        }
+      });
   }
 
   return (
     <div className={styles.mainContainer}>
-      <form method="post">
+      <div className={styles.form} method="post">
         <h1>Login</h1>
 
         <div className={styles.inputs}>
@@ -57,7 +56,7 @@ export function Login() {
         </div>
 
         <Button text="Entrar" onClick={handleSubmit} />
-      </form>
+      </div>
     </div>
   );
 }

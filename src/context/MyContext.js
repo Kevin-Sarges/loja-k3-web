@@ -4,8 +4,8 @@ import { productsFake } from "../services/fakeData";
 export const MyContext = createContext({});
 
 export function MyProvider({ children }) {
-  const [category, setCategory] = useState("");
   let [categorySelected, setCategorySelected] = useState([]);
+  const [category, setCategory] = useState("");
 
   function handleCategory(e) {
     setCategory(e.target.value);
