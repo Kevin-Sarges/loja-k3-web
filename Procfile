@@ -1,1 +1,1 @@
-web: yarn start && serve -s build -l 4000
+web: yanr build && yarn deploy
