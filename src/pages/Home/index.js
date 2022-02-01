@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Header } from "../../components/Header";
 
 import { AuthContext } from "../../context/auth";
-import { categories } from "../../services/fakeData";
+import { categories } from "../../services/categoryProducts";
 
 import styles from "./styles.module.scss";
 

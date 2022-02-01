@@ -6,7 +6,7 @@ import { Button } from "../../components/Button";
 import { DropZone } from "../../components/DropZone";
 
 import { AuthContext } from "../../context/auth";
-import { categories } from "../../services/fakeData";
+import { categories } from "../../services/categoryProducts";
 
 import { api } from "../../services/api";
 import styles from "./styles.module.scss";
@@ -68,7 +68,7 @@ export function PostProduct() {
         <section className={styles.section}>
           <div className={styles.inputs}>
             <label htmlFor="name">Nome do Produto: </label>
-            <input type="text" name="name" onChange={handleChange} />
+            <input type="text" name="name" onChange={handleChange} required />
           </div>
 
           <div className={styles.inputs}>
@@ -91,18 +91,27 @@ export function PostProduct() {
 
           <div className={styles.inputs}>
             <label htmlFor="price">Preço:</label>
-            <input type="text" name="price" onChange={handleChange} />
+            <input type="text" name="price" onChange={handleChange} required />
           </div>
 
           <div className={styles.inputs}>
             <label htmlFor="whatsapp">Whatsapp:</label>
-            <input type="text" name="whatsapp" onChange={handleChange} />
+            <input
+              type="text"
+              name="whatsapp"
+              onChange={handleChange}
+              required
+            />
           </div>
         </section>
 
         <div className={styles.description}>
           <label htmlFor="description">Descrição do produto:</label>
-          <textarea name="description" onChange={handleChange}></textarea>
+          <textarea
+            name="description"
+            onChange={handleChange}
+            required
+          ></textarea>
         </div>
 
         <Button text="Posta" />
