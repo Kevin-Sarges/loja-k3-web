@@ -3,13 +3,18 @@ import React, { useContext } from "react";
 import { Header } from "../../components/Header";
 
 import { AuthContext } from "../../context/auth";
-import { categories, productsFake } from "../../services/fakeData";
+import { categories } from "../../services/fakeData";
 
 import styles from "./styles.module.scss";
 
 export function Home() {
-  const { category, categorySelected, filterCategory, handleCategory } =
-    useContext(AuthContext);
+  const {
+    product,
+    category,
+    categorySelected,
+    filterCategory,
+    handleCategory,
+  } = useContext(AuthContext);
 
   return (
     <>
@@ -28,7 +33,7 @@ export function Home() {
             <option>Filtro</option>
             {categories.map((item) => (
               <option key={item.id} value={item.id}>
-                {item.category}
+                {item.category__product}
               </option>
             ))}
           </select>
@@ -39,11 +44,11 @@ export function Home() {
             ? categorySelected.map((item) => (
                 <div key={item.id} className={styles.componentProducts}>
                   <div className={styles.imageContainer}>
-                    <img src={item.image} alt="Imagem" />
+                    <img src={item.url_image_product} alt="Imagem" />
                   </div>
 
                   <footer>
-                    <h3>{item.name}</h3>
+                    <h3>{item.name_product}</h3>
 
                     <p>
                       Valor
@@ -52,14 +57,14 @@ export function Home() {
                   </footer>
                 </div>
               ))
-            : productsFake.map((item) => (
+            : product.map((item) => (
                 <div key={item.id} className={styles.componentProducts}>
                   <div className={styles.imageContainer}>
-                    <img src={item.image} alt="Imagem" />
+                    <img src={item.url_image_product} alt="Imagem" />
                   </div>
 
                   <footer>
-                    <h3>{item.name}</h3>
+                    <h3>{item.name_product}</h3>
 
                     <p>
                       Valor

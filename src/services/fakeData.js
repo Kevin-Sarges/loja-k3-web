@@ -10,27 +10,27 @@ import SapatoImg02 from "../assets/sapatos01.png";
 export const categories = [
   {
     id: "1",
-    category: "Camisa",
+    category__product: "Camisa",
   },
 
   {
     id: "2",
-    category: "Jeans",
+    category__product: "Jeans",
   },
 
   {
     id: "3",
-    category: "Relogio",
+    category__product: "Relogio",
   },
 
   {
     id: "4",
-    category: "Boné",
+    category__product: "Boné",
   },
 
   {
     id: "5",
-    category: "Sapato",
+    category__product: "Sapato",
   },
 ];
 

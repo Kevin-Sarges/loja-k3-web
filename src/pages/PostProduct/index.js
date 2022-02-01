@@ -13,12 +13,11 @@ import styles from "./styles.module.scss";
 
 export function PostProduct() {
   const navigete = useNavigate();
-  const { category } = useContext(AuthContext);
+  const { category, handleCategory } = useContext(AuthContext);
 
   const [selectImage, setSelectImage] = useState();
   const [formData, setFormData] = useState({
     name: "",
-    type: "",
     price: "",
     whatsapp: "",
     description: "",
@@ -33,21 +32,21 @@ export function PostProduct() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const { name, type, price, whatsapp, description } = formData;
+    const { name, price, whatsapp, description } = formData;
 
     const data = new FormData();
 
-    data.append("name", name);
-    data.append("type", type);
+    data.append("name_product", name);
+    data.append("category__product", category);
     data.append("price", price);
     data.append("whatsapp", whatsapp);
     data.append("description", description);
-    data.append("image", selectImage);
+    data.append("url_image_product", selectImage);
 
     api
       .post("/products/post-product", data)
       .then(() => {
-        navigete("/home");
+        navigete("/");
       })
       .catch((error) => {
         console.log(error);
@@ -68,41 +67,41 @@ export function PostProduct() {
 
         <section className={styles.section}>
           <div className={styles.inputs}>
-            <label for="name">Nome do Produto: </label>
+            <label htmlFor="name">Nome do Produto: </label>
             <input type="text" name="name" onChange={handleChange} />
           </div>
 
           <div className={styles.inputs}>
-            <label for="type">Tipo do produto: </label>
+            <label htmlFor="type">Tipo do produto: </label>
 
             <select
               className={styles.category}
               value={category}
-              onChange={handleChange}
+              onChange={handleCategory}
               name="type"
             >
               <option>---</option>
               {categories.map((item) => (
                 <option key={item.id} value={item.id}>
-                  {item.category}
+                  {item.category__product}
                 </option>
               ))}
             </select>
           </div>
 
           <div className={styles.inputs}>
-            <label for="price">Preço:</label>
+            <label htmlFor="price">Preço:</label>
             <input type="text" name="price" onChange={handleChange} />
           </div>
 
           <div className={styles.inputs}>
-            <label for="whatsapp">Whatsapp:</label>
+            <label htmlFor="whatsapp">Whatsapp:</label>
             <input type="text" name="whatsapp" onChange={handleChange} />
           </div>
         </section>
 
         <div className={styles.description}>
-          <label for="description">Descrição do produto:</label>
+          <label htmlFor="description">Descrição do produto:</label>
           <textarea name="description" onChange={handleChange}></textarea>
         </div>
 

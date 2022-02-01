@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { productsFake } from "../services/fakeData";
 import { api } from "../services/api";
 
 export const AuthContext = createContext();
@@ -10,13 +9,14 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   let [categorySelected, setCategorySelected] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(null);
   const [category, setCategory] = useState("");
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(true);
 
   function handleCategory(e) {
     setCategory(e.target.value);
@@ -24,13 +24,14 @@ export function AuthProvider({ children }) {
 
   function filterCategory(e) {
     const value = e.target.value;
-    categorySelected = productsFake.filter((item) => item.category === value);
+    categorySelected = product.filter(
+      (item) => item.category__product === value
+    );
 
     if (categorySelected.length <= 0) {
-      console.log(categorySelected);
-      return alert("Não a produtos dessa categoria !!");
+      alert("Nenhum produto encontrado !!");
+      setCategorySelected([]);
     } else {
-      console.log(categorySelected);
       setCategorySelected(categorySelected);
     }
   }
@@ -58,10 +59,12 @@ export function AuthProvider({ children }) {
       api.defaults.headers.Authorization = `Bearer ${tokenUser}`;
 
       setToken({ email });
-      navigate("/home");
+      setLoading(false);
+      navigate("/");
     } else {
       alert("Email ou Senha incorretas !!");
-      navigate("/");
+      setLoading(false);
+      navigate("/login");
     }
   }
 
@@ -70,8 +73,21 @@ export function AuthProvider({ children }) {
     api.defaults.headers.Authorization = null;
 
     setToken(null);
-    navigate("/");
+    navigate("/login");
   }
+
+  useEffect(() => {
+    async function listProduct() {
+      try {
+        const response = await api.get("/products");
+        setProduct(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    listProduct();
+  }, []);
 
   useEffect(() => {
     const tokenUser = localStorage.getItem("token");
@@ -87,16 +103,15 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
+        product,
         category,
         categorySelected,
         handleCategory,
         filterCategory,
         handleChange,
         handleLogin,
-
         authentificated: !!token,
         token,
-
         logout,
         loading,
       }}

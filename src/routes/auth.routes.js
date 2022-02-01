@@ -6,17 +6,18 @@ import { AuthContext } from "../context/auth";
 import { Login } from "../pages/Login";
 import { Home } from "../pages/Home";
 import { PostProduct } from "../pages/PostProduct";
+import { Loading } from "../components/Loading";
 
 export function AppRoutes() {
   function Private({ children }) {
     const { authentificated, loading } = useContext(AuthContext);
 
     if (loading) {
-      return <p>Carregando...</p>;
+      return <Loading />;
     }
 
     if (!authentificated) {
-      return <Navigate to="/" />;
+      return <Navigate to="/login" />;
     }
 
     return children;
@@ -24,9 +25,9 @@ export function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route
-        path="/home"
+        path="/"
         element={
           <Private>
             <Home />
