@@ -6,6 +6,7 @@ import { AuthContext } from "../context/auth";
 import { Login } from "../pages/Login";
 import { Home } from "../pages/Home";
 import { PostProduct } from "../pages/PostProduct";
+import { Product } from "../pages/Product";
 import { Loading } from "../components/Loading";
 
 export function AppRoutes() {
@@ -39,6 +40,14 @@ export function AppRoutes() {
         element={
           <Private>
             <PostProduct />
+          </Private>
+        }
+      />
+      <Route
+        path="/product/:id"
+        element={
+          <Private>
+            <Product />
           </Private>
         }
       />

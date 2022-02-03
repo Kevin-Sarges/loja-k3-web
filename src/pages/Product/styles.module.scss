@@ -1,0 +1,50 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  img {
+    width: 500px;
+    height: 500px;
+    border: 1px solid var(--Secondary03);
+    border-radius: 8px;
+  }
+
+  .description {
+    height: 100%;
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    footer {
+      margin-top: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .value {
+        p {
+          font-weight: 700;
+          color: var(--Green);
+        }
+      }
+
+      button {
+        padding: 12px 40px;
+        background-color: var(--Red);
+        border: 1px solid var(--Secondary03);
+        border-radius: 8px;
+        color: var(--White);
+        font-family: 700;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--LigthRed);
+        }
+      }
+    }
+  }
+}
