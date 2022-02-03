@@ -59,7 +59,7 @@ export function PostProduct() {
       <Header />
       <form
         method="post"
-        enctype="multiipart/form-data"
+        encType="multiipart/form-data"
         onSubmit={handleSubmit}
         className={styles.formContainer}
       >
