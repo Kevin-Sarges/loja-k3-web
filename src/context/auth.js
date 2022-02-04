@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { api } from "../services/api";
 
@@ -7,8 +7,10 @@ export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   let [categorySelected, setCategorySelected] = useState([]);
+  const [products, setProducts] = useState([]);
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(null);
@@ -80,7 +82,7 @@ export function AuthProvider({ children }) {
     async function listProduct() {
       try {
         const response = await api.get("/products");
-        setProduct(response.data);
+        setProducts(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -88,6 +90,31 @@ export function AuthProvider({ children }) {
 
     listProduct();
   }, []);
+
+  useEffect(() => {
+    async function handleProduct() {
+      try {
+        const response = await api.get(`/products/${id}`);
+
+        setProduct(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    handleProduct();
+  }, []);
+
+  async function deleteProduct() {
+    try {
+      await api.delete(`/products/post-product/delete/${id}`);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      navigate("/");
+    }
+    console.log("teste");
+  }
 
   useEffect(() => {
     const tokenUser = localStorage.getItem("token");
@@ -104,6 +131,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         product,
+        products,
         category,
         categorySelected,
         handleCategory,
@@ -114,6 +142,7 @@ export function AuthProvider({ children }) {
         token,
         logout,
         loading,
+        deleteProduct,
       }}
     >
       {children}

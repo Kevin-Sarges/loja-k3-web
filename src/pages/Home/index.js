@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Header } from "../../components/Header";
 
@@ -8,8 +9,9 @@ import { categories } from "../../services/categoryProducts";
 import styles from "./styles.module.scss";
 
 export function Home() {
+  const navigate = useNavigate();
   const {
-    product,
+    products,
     category,
     categorySelected,
     filterCategory,
@@ -42,7 +44,13 @@ export function Home() {
         <div className={styles.products}>
           {categorySelected.length > 0
             ? categorySelected.map((item) => (
-                <div key={item.id} className={styles.componentProducts}>
+                <div
+                  key={item.id}
+                  onClick={() => {
+                    navigate(`/product/${item.id}`);
+                  }}
+                  className={styles.componentProducts}
+                >
                   <div className={styles.imageContainer}>
                     <img src={item.url_image_product} alt="Imagem" />
                   </div>
@@ -57,8 +65,14 @@ export function Home() {
                   </footer>
                 </div>
               ))
-            : product.map((item) => (
-                <div key={item.id} className={styles.componentProducts}>
+            : products.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => {
+                    navigate(`/product/${item.id}`);
+                  }}
+                  className={styles.componentProducts}
+                >
                   <div className={styles.imageContainer}>
                     <img src={item.url_image_product} alt="Imagem" />
                   </div>
