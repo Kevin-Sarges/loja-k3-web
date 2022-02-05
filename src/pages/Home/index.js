@@ -10,6 +10,7 @@ import styles from "./styles.module.scss";
 
 export function Home() {
   const navigate = useNavigate();
+
   const {
     products,
     category,
@@ -47,7 +48,7 @@ export function Home() {
                 <div
                   key={item.id}
                   onClick={() => {
-                    navigate(`/product/${item.id}`);
+                    navigate(`/produto/${item.id}`);
                   }}
                   className={styles.componentProducts}
                 >
@@ -69,7 +70,7 @@ export function Home() {
                 <div
                   key={item.id}
                   onClick={() => {
-                    navigate(`/product/${item.id}`);
+                    navigate(`/produto/${item.id}`);
                   }}
                   className={styles.componentProducts}
                 >

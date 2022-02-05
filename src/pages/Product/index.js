@@ -1,12 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth";
 import { Header } from "../../components/Header";
 
+import { api } from "../../services/api";
 import styles from "./styles.module.scss";
 
 export function Product() {
-  const { product } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const { id } = useParams();
+  const { product, setProduct } = useContext(AuthContext);
+
+  async function deleteProduct() {
+    try {
+      await api.delete(`/products/post-product/delete/${id}`);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      navigate("/");
+    }
+  }
+
+  useEffect(() => {
+    async function handleProduct() {
+      try {
+        const response = await api.get(`/products/${id}`);
+
+        setProduct(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    handleProduct();
+  }, [id, setProduct]);
 
   return (
     <>
@@ -26,7 +55,7 @@ export function Product() {
               <p>{product.price}</p>
             </div>
 
-            <button>Deletar</button>
+            <button onClick={deleteProduct}>Deletar</button>
           </footer>
         </div>
       </main>

@@ -44,7 +44,7 @@ export function AppRoutes() {
         }
       />
       <Route
-        path="/product/:id"
+        path="/produto/:id"
         element={
           <Private>
             <Product />

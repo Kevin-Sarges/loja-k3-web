@@ -7,7 +7,6 @@ export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const navigate = useNavigate();
-  const { id } = useParams();
 
   let [categorySelected, setCategorySelected] = useState([]);
   const [products, setProducts] = useState([]);
@@ -26,7 +25,7 @@ export function AuthProvider({ children }) {
 
   function filterCategory(e) {
     const value = e.target.value;
-    categorySelected = product.filter(
+    categorySelected = products.filter(
       (item) => item.category__product === value
     );
 
@@ -84,37 +83,12 @@ export function AuthProvider({ children }) {
         const response = await api.get("/products");
         setProducts(response.data);
       } catch (error) {
-        console.log(error);
+        navigate("/login");
       }
     }
 
     listProduct();
   }, []);
-
-  useEffect(() => {
-    async function handleProduct() {
-      try {
-        const response = await api.get(`/products/${id}`);
-
-        setProduct(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    handleProduct();
-  }, []);
-
-  async function deleteProduct() {
-    try {
-      await api.delete(`/products/post-product/delete/${id}`);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      navigate("/");
-    }
-    console.log("teste");
-  }
 
   useEffect(() => {
     const tokenUser = localStorage.getItem("token");
@@ -134,15 +108,15 @@ export function AuthProvider({ children }) {
         products,
         category,
         categorySelected,
+        authentificated: !!token,
+        token,
+        loading,
+        setProduct,
         handleCategory,
         filterCategory,
         handleChange,
         handleLogin,
-        authentificated: !!token,
-        token,
         logout,
-        loading,
-        deleteProduct,
       }}
     >
       {children}
