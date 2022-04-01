@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
@@ -50,7 +51,7 @@ export function PostProduct() {
       })
       .catch((error) => {
         console.log(error);
-        alert("erro ao salvar!!");
+        toast.error("erro ao salvar!!");
       });
   }
 

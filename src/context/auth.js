@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { api } from "../services/api";
 
@@ -30,8 +32,18 @@ export function AuthProvider({ children }) {
     );
 
     if (categorySelected.length <= 0) {
-      alert("Nenhum produto encontrado !!");
       setCategorySelected([]);
+      alert("Nenhum produto encontrado 🥲");
+
+      // toast.error("Nenhum produto encontrado !!", {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      // });
     } else {
       setCategorySelected(categorySelected);
     }
@@ -63,8 +75,8 @@ export function AuthProvider({ children }) {
       setLoading(false);
       navigate("/");
     } else {
-      alert("Email ou Senha incorretas !!");
       setLoading(false);
+      toast.error("Email ou Senha incorretas !!");
       navigate("/login");
     }
   }
