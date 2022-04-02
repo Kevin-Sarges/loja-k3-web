@@ -1,0 +1,19 @@
+.modalContainer {
+  background-color: rgba(0, 0, 0, 0.41);
+  position: absolute;
+  inset: 0%;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+
+  #close {
+    width: 25px;
+    height: 25px;
+    color: var(--White);
+    position: fixed;
+    top: 55px;
+    right: 60px;
+    cursor: pointer;
+  }
+}

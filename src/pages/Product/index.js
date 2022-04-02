@@ -6,12 +6,14 @@ import { Header } from "../../components/Header";
 
 import { api } from "../../services/api";
 import styles from "./styles.module.scss";
+import { Modal } from "../../components/Modal";
 
 export function Product() {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  const { product, setProduct } = useContext(AuthContext);
+  const { product, setProduct, modalIsOpen, openModal, closeModal } =
+    useContext(AuthContext);
 
   async function deleteProduct() {
     try {
@@ -55,7 +57,10 @@ export function Product() {
               <p>{product.price}</p>
             </div>
 
+            <button onClick={openModal}>Editar</button>
             <button onClick={deleteProduct}>Deletar</button>
+
+            <Modal openModal={modalIsOpen} closeModal={closeModal} />
           </footer>
         </div>
       </main>

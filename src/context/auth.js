@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   let [categorySelected, setCategorySelected] = useState([]);
+  const [modalIsOpen, setIsOpen] = React.useState(false);
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +21,14 @@ export function AuthProvider({ children }) {
     email: "",
     password: "",
   });
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   function handleCategory(e) {
     setCategory(e.target.value);
@@ -116,6 +125,7 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
+        modalIsOpen,
         product,
         products,
         category,
@@ -123,6 +133,8 @@ export function AuthProvider({ children }) {
         authentificated: !!token,
         token,
         loading,
+        openModal,
+        closeModal,
         setProduct,
         handleCategory,
         filterCategory,
