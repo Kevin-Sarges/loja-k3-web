@@ -34,12 +34,24 @@
 
       button {
         padding: 12px 40px;
-        background-color: var(--Red);
-        border: 1px solid var(--Secondary03);
         border-radius: 8px;
         color: var(--White);
-        font-family: 700;
+        font-weight: 700;
         cursor: pointer;
+      }
+
+      .buttonEdit {
+        background-color: var(--Secondary05);
+        border: 1px solid var(--Secondary04);
+
+        &:hover {
+          background-color: var(--Secondary02);
+        }
+      }
+
+      .buttonDelete {
+        background-color: var(--Red);
+        border: 1px solid var(--Secondary03);
 
         &:hover {
           background-color: var(--LigthRed);

@@ -57,8 +57,12 @@ export function Product() {
               <p>{product.price}</p>
             </div>
 
-            <button onClick={openModal}>Editar</button>
-            <button onClick={deleteProduct}>Deletar</button>
+            <button className={styles.buttonEdit} onClick={openModal}>
+              Editar
+            </button>
+            <button className={styles.buttonDelete} onClick={deleteProduct}>
+              Deletar
+            </button>
 
             <Modal openModal={modalIsOpen} closeModal={closeModal} />
           </footer>
