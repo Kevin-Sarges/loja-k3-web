@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { api } from "../services/api";
@@ -9,6 +9,7 @@ export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   let [categorySelected, setCategorySelected] = useState([]);
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -17,9 +18,16 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(null);
   const [category, setCategory] = useState("");
+  const [selectImage, setSelectImage] = useState();
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
+  });
+  const [formData, setFormData] = useState({
+    name: "",
+    price: "",
+    whatsapp: "",
+    description: "",
   });
 
   function openModal() {
@@ -64,6 +72,12 @@ export function AuthProvider({ children }) {
     setInputs({ ...inputs, [name]: value });
   }
 
+  function handleChangeForm(e) {
+    const { name, value } = e.target;
+
+    setFormData({ ...formData, [name]: value });
+  }
+
   async function handleLogin(e) {
     e.preventDefault();
 
@@ -96,6 +110,57 @@ export function AuthProvider({ children }) {
 
     setToken(null);
     navigate("/login");
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const { name, price, whatsapp, description } = formData;
+
+    const data = new FormData();
+
+    data.append("name_product", name);
+    data.append("category__product", category);
+    data.append("price", price);
+    data.append("whatsapp", whatsapp);
+    data.append("description", description);
+    data.append("url_image_product", selectImage);
+
+    api
+      .post("/products/post-product", data)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("erro ao salvar!!");
+      });
+  }
+
+  function handleUpdated(e) {
+    e.preventDefault();
+
+    const { name, price, whatsapp, description } = formData;
+
+    const data = new FormData();
+
+    data.append("name_product", name);
+    data.append("category__product", category);
+    data.append("price", price);
+    data.append("whatsapp", whatsapp);
+    data.append("description", description);
+    data.append("url_image_product", selectImage);
+
+    api
+      .post(`/products/update-product/${id}`, data)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(id);
+        toast.error("erro ao editar!!");
+      });
   }
 
   useEffect(() => {
@@ -141,6 +206,11 @@ export function AuthProvider({ children }) {
         handleChange,
         handleLogin,
         logout,
+        handleSubmit,
+        setSelectImage,
+        setFormData,
+        handleChangeForm,
+        handleUpdated,
       }}
     >
       {children}
